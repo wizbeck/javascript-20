@@ -11,7 +11,7 @@ function tellMe(joke) {
   const jokeString = joke.trim().replace(/ /g, '%20');
   // VoiceRSS Speech Parameters
   VoiceRSS.speech({
-    key: 'YOUR_API_KEY_HERE',
+    key: CONSTANTS.TTS_API_KEY,
     src: jokeString,
     hl: 'en-us',
     r: 0,
@@ -34,12 +34,10 @@ async function getJokes() {
     } else {
       joke = data.joke;
     }
-    // Passing Joke to VoiceRSS API
     tellMe(joke);
-    // Disable Button
     toggleButton();
   } catch (error) {
-    // Catch Error Here
+    throw new Error('JOKE BROKE!', error.message);
   }
 }
 
